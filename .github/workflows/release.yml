@@ -36,9 +36,9 @@ jobs:
           host: $ {{ secrets.HOST }}
           port: 10155  # SSH 포트 추가
           username: $ {{ secrets.USERNAME }}
-          key: ${{ secrets.PRIVATE_KEY }}
+          password: ${{ secrets.PRIVATE_KEY }}
           source: "./build/libs/*.jar"
-          target: "/home/centeradmin/Downloads/"
+          target: "/home/centeradmin/Downloads/Grinder"
 
       # 🔹 Dockerfile 원격 서버로 전송
       - name: Copy docker file to remote
@@ -47,7 +47,7 @@ jobs:
           host: $ {{ secrets.HOST }}
           port: 10155  # SSH 포트 추가
           username: $ {{ secrets.USERNAME }}
-          key: ${{ secrets.PRIVATE_KEY }}
+          password: ${{ secrets.PRIVATE_KEY }}
           source: "./Dockerfile"
           target: "/home/centeradmin/Downloads/"
 
@@ -58,9 +58,9 @@ jobs:
           host: $ {{ secrets.HOST }}
           port: 10155  # SSH 포트 추가
           username: $ {{ secrets.USERNAME }}
-          key: ${{ secrets.PRIVATE_KEY }}
+          password: ${{ secrets.PRIVATE_KEY }}
           source: "./docker-compose.yml"
-          target: "/home/centeradmin/Downloads/"
+          target: "/home/centeradmin/Downloads/Grinder"
 
       # 🔹 원격 서버에서 Docker Compose 실행
       - name: Run docker compose
@@ -69,10 +69,10 @@ jobs:
           host: $ {{ secrets.HOST }}
           port: 10155  # SSH 포트 추가
           username: $ {{ secrets.USERNAME }}
-          key: ${{ secrets.PRIVATE_KEY }}
+          password: ${{ secrets.PRIVATE_KEY }}
           script_stop: true
           script: |
-            cd /home/centeradmin/Downloads
-            docker compose down
-            docker compose up -d --build
+            cd /home/centeradmin/Downloads/Grinder
+            docker-compose down
+            docker-compose up -d --build
             docker ps -a  # 실행 중인 컨테이너 확인
