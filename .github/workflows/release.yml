@@ -40,6 +40,17 @@ jobs:
           source: "./build/libs/*.jar"
           target: "/home/centeradmin/Downloads/Grinder"
 
+      # 🔹 nginx 설정 파일 원격 서버로 전송
+      - name: Copy nginx config file to remote
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          port: 10155  # SSH 포트 추가
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PRIVATE_KEY }}
+          source: "./nginx"
+          target: "/home/centeradmin/Downloads/Grinder"
+
       # 🔹 Dockerfile 원격 서버로 전송
       - name: Copy docker file to remote
         uses: appleboy/scp-action@master
