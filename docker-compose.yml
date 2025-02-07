@@ -12,9 +12,8 @@ services:
       - app-network
 
   spring-boot:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: m020202/grinder:latest
+    container_name: spring-boot
     ports:
       - "8080:8080"
     depends_on:
