@@ -2,4 +2,4 @@ spring:
   config:
     import:
       - classpath:/secret/application-local.yml
-      - classpath:/secret/application-dev.yml
+
