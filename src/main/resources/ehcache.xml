@@ -2,7 +2,7 @@
         xmlns="http://www.ehcache.org/v3">
     <cache alias="default">
         <expiry>
-            <ttl unit="seconds">60</ttl> <!-- TTL 설정: 1시간 -->
+            <ttl unit="seconds">5</ttl> <!-- TTL 설정: 1시간 -->
         </expiry>
         <heap unit="entries">10000</heap> <!-- 힙 크기: 1000 엔트리 -->
     </cache>
