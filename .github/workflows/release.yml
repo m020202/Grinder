@@ -82,6 +82,7 @@ jobs:
           script_stop: true
           script: |
             cd /home/centeradmin/Downloads/Grinder
+            docker-compose down 
             docker image rm ${{ secrets.DOCKER_USERNAME }}/grinder:latest
             docker pull ${{ secrets.DOCKER_USERNAME }}/grinder:latest
             docker-compose up -d
