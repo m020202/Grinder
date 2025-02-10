@@ -1,25 +1,23 @@
 version: '3'
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: mydb
-    environment:
-      MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: mydb
-    ports:
-      - "3308:3306"
-    networks:
-      - app-network
+#  mysql:
+#    image: mysql:8.0
+#    container_name: mysql
+#    environment:
+#      MYSQL_ROOT_PASSWORD: 1234
+#      MYSQL_DATABASE: mydb
+#    ports:
+#      - "3308:3306"
+#    networks:
+#      - app-network
 
   spring-boot:
     image: m020202/grinder:latest
     container_name: spring-boot
     ports:
       - "8080:8080"
-    depends_on:
-      - mysql
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3308/mydb
+      SPRING_DATASOURCE_URL: jdbc:mysql://165.246.75.167:3308/mydb
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1234
     networks:
