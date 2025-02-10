@@ -82,6 +82,7 @@ jobs:
           script_stop: true
           script: |
             cd /home/centeradmin/Downloads/Grinder
-            docker-compose down
+            docker pull ${{ secrets.DOCKER_USERNAME }}/grinder:latest
+            docker image rm 
             docker-compose up -d --build
             docker ps -a  # 실행 중인 컨테이너 확인
