@@ -30,7 +30,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build with Gradle
-        run: ./gradlew clean build -x test -Dspring.profiles.active=dev
+        run: ./gradlew clean build -x test -Dspring.profiles.active=prod
 
       # 🔹 Docker 로그인
       - name: Log in to Docker Hub

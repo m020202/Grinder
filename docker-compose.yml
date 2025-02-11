@@ -16,10 +16,6 @@ services:
     container_name: spring-boot
     ports:
       - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://165.246.75.167:3308/mydb
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 1234
 
   nginx:
     image: nginx:latest
