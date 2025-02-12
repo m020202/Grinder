@@ -21,7 +21,7 @@ public class CacheConfig {
                 CacheConfigurationBuilder.newCacheConfigurationBuilder(
                                 Object.class,
                                 Object.class,
-                                ResourcePoolsBuilder.heap(1)
+                                ResourcePoolsBuilder.heap(100)
                         )
                         .withExpiry(ExpiryPolicyBuilder.timeToLiveExpiration(Duration.ofSeconds(3600)))
                         .build();
