@@ -1,27 +1,23 @@
 #!/bin/bash
 
-# 🔹 active_version.conf에서 현재 활성화된 버전 가져오기
-ACTIVE_VERSION=$(perl -nle 'print $1 if /set \$active_version (\w+)/' ./active_version.conf)
+IS_GREEN_EXIST=$(docker ps | grep green)
+DEFAULT_CONF=" /etc/nginx/nginx.conf"
 
-# 다음 배포할 버전 결정
-if [ "$ACTIVE_VERSION" == "blue" ]; then
-  NEW_VERSION="green"
-  OLD_VERSION="blue"
+# blue가 실행 중이면 green을 up
+if [ -z $IS_GREEN_EXIST ];then
+  docker-compose pull m020202/grinder:latest
+  docker-compose up -d green
+  sleep 3
+  sudo ln -s -f /etc/nginx/sites-available/green /etc/nginx/sites-enabled/default
+  sudo nginx -s reload
+  docker-compose stop blue
+
+# green이 실행 중이면 blue를 up
 else
-  NEW_VERSION="blue"
-  OLD_VERSION="green"
+  docker-compose pull m020202/grinder:latest
+  docker-compose up -d blue
+  sleep 3
+  sudo ln -s -f /etc/nginx/sites-available/blue /etc/nginx/sites-enabled/default
+  docker-compose stop green
 fi
 
-# 새로운 버전 컨테이너 실행
-docker-compose up -d --no-deps --build $NEW_VERSION
-
-# 🔹 Nginx의 active_version 변경
-echo "set \$active_version $NEW_VERSION;"
-
-# Nginx 설정 리로드 (무중단 트래픽 전환)
-docker exec nginx-server nginx -s reload
-
-# 만약 실행 중이라면, 기존 버전 컨테이너 종료
-if docker ps --format "{{.Names}}" | grep -q "^$OLD_VERSION$"; then
-  docker stop $OLD_VERSION && docker rm $OLD_VERSION
-fi
