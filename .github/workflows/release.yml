@@ -72,6 +72,7 @@ jobs:
           password: ${{ secrets.PRIVATE_KEY }}
           script_stop: true
           script: |
+            echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S bash -c '
             cd /home/centeradmin/Downloads/Grinder
             chmod +x deploy.sh
             ./deploy.sh
