@@ -7,7 +7,7 @@ DEFAULT_CONF=" /etc/nginx/nginx.conf"
 if [ -z $IS_GREEN_EXIST ];then
   docker-compose pull m020202/green:latest
   docker-compose up -d green
-  sleep 3
+  sleep 2
   sudo ln -s -f /etc/nginx/sites-available/green /etc/nginx/sites-enabled/default
   sudo nginx -s reload
   docker-compose stop blue
@@ -16,7 +16,7 @@ if [ -z $IS_GREEN_EXIST ];then
 else
   docker-compose pull m020202/blue:latest
   docker-compose up -d blue
-  sleep 3
+  sleep 2
   sudo ln -s -f /etc/nginx/sites-available/blue /etc/nginx/sites-enabled/default
   docker-compose stop green
 fi
