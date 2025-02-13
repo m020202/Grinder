@@ -73,4 +73,5 @@ jobs:
           script_stop: true
           script: |
             cd /home/centeradmin/Downloads/Grinder
+            chmod +x deploy.sh
             ./deploy.sh
