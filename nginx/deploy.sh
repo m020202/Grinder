@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 🔹 active_version.conf에서 현재 활성화된 버전 가져오기
-ACTIVE_VERSION=$(grep -oP '(?<=set \$active_version )\w+' /etc/nginx/conf.d/active_version.conf)
+ACTIVE_VERSION=$(perl -nle 'print $1 if /set \$active_version (\w+)/' ./active_version.conf)
 
 # 다음 배포할 버전 결정
 if [ "$ACTIVE_VERSION" == "blue" ]; then
