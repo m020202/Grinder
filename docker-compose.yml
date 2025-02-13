@@ -2,13 +2,13 @@ version: '3'
 services:
 
   blue:
-    image: m020202/grinder:latest
+    image: m020202/blue:latest
     container_name: blue
     ports:
       - "8081:8080"
 
   green:
-    image: m020202/grinder:latest
+    image: m020202/green:latest
     container_name: green
     ports:
       - "8082:8080"
