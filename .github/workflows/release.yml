@@ -51,7 +51,7 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/blue:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/green:latest
 
-      # 🔹 nginx 설정 파일 원격 서버로 전송
+      # 🔹 deploy.sh 파일 원격 서버로 전송
       - name: Copy nginx config file to remote
         uses: appleboy/scp-action@master
         with:
