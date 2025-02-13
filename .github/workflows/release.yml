@@ -42,12 +42,14 @@ jobs:
       # 🔹 Docker 이미지 빌드 및 태깅
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/grinder:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/blue:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/green:latest .
 
       # 🔹 Docker 이미지 푸시
       - name: Push Docker image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/grinder:latest    
+          docker push ${{ secrets.DOCKER_USERNAME }}/blue:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/green:latest
 
       # 🔹 nginx 설정 파일 원격 서버로 전송
       - name: Copy nginx config file to remote
