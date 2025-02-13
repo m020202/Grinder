@@ -1,8 +1,8 @@
 name: Build Gradle and Deploy
 
-#on:
-#  push:
-#    branches: [ "main" ]
+on:
+  push:
+    branches: [ "main" ]
 
 jobs:
   build-gradle:
@@ -71,8 +71,8 @@ jobs:
           source: "./docker-compose.yml"
           target: "/home/centeradmin/Downloads/Grinder"
 
-      # 🔹 원격 서버에서 Docker Compose 실행
-      - name: Run docker compose
+      # 🔹 원격 서버에서 deploy.sh 실행 (무중단 배포)
+      - name: Run Zero-Downtime Deployment
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -81,8 +81,6 @@ jobs:
           password: ${{ secrets.PRIVATE_KEY }}
           script_stop: true
           script: |
-            cd /home/centeradmin/Downloads/Grinder
-            docker-compose down 
-            docker image rm ${{ secrets.DOCKER_USERNAME }}/grinder:latest
-            docker pull ${{ secrets.DOCKER_USERNAME }}/grinder:latest
-            docker-compose up -d
+            cd /home/centeradmin/Downloads/Grinder/nginx
+            chmod +x deploy.sh
+            ./deploy.sh
