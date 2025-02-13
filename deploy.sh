@@ -8,8 +8,8 @@ if [ -z $IS_GREEN_EXIST ];then
   docker image rm m020202/green:latest
   docker run -d -p 8082:8080 --name green m020202/green:latest
   sleep 2
-  ln -s -f /etc/nginx/sites-available/green /etc/nginx/sites-enabled/default
-  nginx -s reload
+  sudo ln -s -f /etc/nginx/sites-available/green /etc/nginx/sites-enabled/default
+  sudo nginx -s reload
   docker stop blue
   docker rm blue
 
@@ -19,6 +19,7 @@ else
   docker run -d -p 8081:8080 --name blue m020202/blue:latest
   sleep 2
   sudo ln -s -f /etc/nginx/sites-available/blue /etc/nginx/sites-enabled/default
+  sudo nginx -s reload
   docker stop green
   docker rm green
 fi
