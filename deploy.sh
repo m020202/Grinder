@@ -1,10 +1,10 @@
 #!/bin/bash
 
-IS_GREEN_EXIST=$(docker ps | grep blue)
+IS_BLUE_EXIST=$(docker ps | grep blue)
 DEFAULT_CONF=" /etc/nginx/nginx.conf"
 
 # blue가 실행 중이면 green을 up
-if [ -z $IS_GREEN_EXIST ];then
+if [ -n $IS_BLUE_EXIST ];then
   docker run -d -p 8081:8080 --name green m020202/grinder:latest
   sleep 2
   sudo sh -c 'echo "set \$service_url green;" > /etc/nginx/conf.d/service_url.inc'
