@@ -10,7 +10,7 @@ fi
 if [ $IS_BLUE_RUNNING = true ];then
   docker run -d -p 8081:8080 --name green m020202/grinder:latest
   sleep 2
-  sudo sh -c 'echo "set \$service_url green;" > /etc/nginx/conf.d/service_url.inc'
+  sudo sh -c 'echo "set \$service_url green;" > /etc/nginx/conf.d/service-env.inc'
   sudo nginx -s reload
   docker rm -f blue
 
@@ -18,7 +18,7 @@ if [ $IS_BLUE_RUNNING = true ];then
 else
   docker run -d -p 8080:8080 --name blue m020202/grinder:latest
   sleep 2
-  sudo sh -c 'echo "set \$service_url blue;" > /etc/nginx/conf.d/service_url.inc'
+  sudo sh -c 'echo "set \$service_url blue;" > /etc/nginx/conf.d/service-env.inc'
   sudo nginx -s reload
   docker rm -f green
 fi
