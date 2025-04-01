@@ -6,8 +6,6 @@ else
   IS_BLUE_RUNNING=false
 fi
 
-DEFAULT_CONF=" /etc/nginx/nginx.conf"
-
 # blue가 실행 중이면 green을 up
 if [ $IS_BLUE_RUNNING = true ];then
   docker run -d -p 8081:8080 --name green m020202/grinder:latest
