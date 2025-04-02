@@ -6,6 +6,8 @@ else
   IS_BLUE_RUNNING=false
 fi
 
+docker pull m020202/grinder
+
 # blue가 실행 중이면 green을 up
 if [ $IS_BLUE_RUNNING = true ];then
   docker run -d -p 8081:8080 --name green m020202/grinder:latest
@@ -22,4 +24,8 @@ else
   sudo nginx -s reload
   docker rm -f green
 fi
+
+docker rmi $(docker images --format "{{.Repository}}:{{.Tag}} {{.ID}}" | grep "m020202/grinder:<none>" | awk '{print $2}')
+
+
 
